@@ -24,5 +24,5 @@ class Solution:
 
 if __name__ == "__main__":
     solution = Solution()
-    print(solution.lengthOfLongestSubstring("pwwkew"))
-    print(solution.lengthOfLongestSubstring("aab"))
+    assert solution.lengthOfLongestSubstring("pwwkew") == 3
+    assert solution.lengthOfLongestSubstring("aab") == 2
