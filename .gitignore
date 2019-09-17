@@ -219,3 +219,4 @@ tags
 .history
 
 # End of https://www.gitignore.io/api/vim,c++,julia,python,visualstudiocode
+tmp.py
