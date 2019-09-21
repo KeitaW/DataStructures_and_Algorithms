@@ -1,7 +1,8 @@
 class Solution:
 
     def lengthOfLongestSubstring(self, string: str) -> int:
-        if len(string) == 0: return 0
+        if len(string) == 0:
+             return 0
         NCHARS = 256
         # Initialize the visited array as -1, -1 is used to indicate
         # that character has not been visited yet.
@@ -22,7 +23,9 @@ class Solution:
             visited[ord(string[i])] = i
         return max_len
 
+
 if __name__ == "__main__":
     solution = Solution()
     assert solution.lengthOfLongestSubstring("pwwkew") == 3
     assert solution.lengthOfLongestSubstring("aab") == 2
+    
