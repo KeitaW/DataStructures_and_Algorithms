@@ -4,7 +4,7 @@
 
 
 class Node:
-    def __init__(self, val, left, right, next):
+    def __init__(self, val, left, right, next=None):
         self.val = val
         self.left = left
         self.right = right
