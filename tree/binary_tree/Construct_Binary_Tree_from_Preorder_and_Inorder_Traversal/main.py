@@ -11,19 +11,15 @@ class TreeNode:
 
 class Solution:
     def buildTree(self, preorder: List[int], inorder: List[int]) -> TreeNode:
-        pass
+        in_id_table = {val: idx for idx, val in enumerate(inorder)}
 
-
-def print_binary_tree(root):
-    node = root
-    current = [node]
-    while current:
-        next_level = []
-        for node in current:
-            print(node.val, end=" ")
-            if node.left:
-                next_level.append(node.left)
-            if node.right:
-                next_level.append(node.right)
-        print()
-        current = next_level
+        def func(in_left, in_right):
+            if in_left > in_right:
+                return None
+            val = preorder.pop(0)
+            root = TreeNode(val)
+            in_root = in_id_table[val]
+            root.left = func(in_left, in_root - 1)
+            root.right = func(in_root + 1, in_right)
+            return root
+        return func(0, len(inorder) - 1)
