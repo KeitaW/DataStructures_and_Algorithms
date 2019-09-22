@@ -13,6 +13,8 @@ class Node:
 
 class Solution:
     def connect(self, root: 'Node') -> 'Node':
+        if root is None:
+            return root
         node = root
         current = [node]
         while current:
@@ -20,8 +22,6 @@ class Solution:
             prev_node = None
             for node in current:
                 if prev_node:
-                    print(
-                        f"Next node on the right of {prev_node.val} is {node.val}")
                     prev_node.next = node
                 if node.left:
                     next_level.append(node.left)
