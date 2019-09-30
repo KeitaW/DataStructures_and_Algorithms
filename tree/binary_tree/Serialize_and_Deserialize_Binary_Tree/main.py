@@ -5,14 +5,14 @@ class TreeNode(object):
         self.left = None
         self.right = None
 
-    def __repr__(self, level=0, right=False):
+    def __str__(self, level=0, right=False):
         return (
             "    " * (level - 1)
             + (" └──" if right else (
                 " ├──" if level != 0 else ""))
             + " " + str(self.val) + "\n"
-            + (self.left.__repr__(level + 1, False) if self.left else "")
-            + (self.right.__repr__(level + 1, True) if self.right else "")
+            + (self.left.__str__(level + 1, False) if self.left else "")
+            + (self.right.__str__(level + 1, True) if self.right else "")
         )
 
 
@@ -44,7 +44,10 @@ class Codec:
         :type data: str
         :rtype: TreeNode
         """
-        def r_deserialize(node):
+        # import ipdb
+        # ipdb.set_trace()
+
+        def r_deserialize(node=None):
             if data[0] == "None":
                 data.pop(0)
                 return None
@@ -53,8 +56,7 @@ class Codec:
             node.right = r_deserialize(data)
             return node
         data = data.split(",")
-        root = TreeNode(data.pop(0))
-        r_deserialize(root)
+        root = r_deserialize()
         return root
 
 

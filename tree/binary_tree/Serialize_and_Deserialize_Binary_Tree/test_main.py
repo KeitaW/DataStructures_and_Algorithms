@@ -4,6 +4,13 @@ from tree.binary_tree.Serialize_and_Deserialize_Binary_Tree.main import Codec, T
 
 @pytest.fixture
 def test_tree():
+    """
+        1
+        ├── 2
+        └── 3
+            ├── 4
+            └── 5
+    """
     root = TreeNode(1)
     root.left = TreeNode(2)
     root.right = TreeNode(3)
@@ -26,4 +33,4 @@ def test_serialize(test_tree, test_sequence):
 def test_deserialize(test_tree, test_sequence):
     codec = Codec()
     tree = codec.deserialize(test_sequence)
-    assert tree == test_tree
+    assert tree == test_tree, f"{tree} ≠ \n {test_tree}"
