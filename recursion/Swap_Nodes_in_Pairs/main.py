@@ -1,4 +1,7 @@
+from copy import deepcopy
 # Definition for singly-linked list.
+
+
 class ListNode:
     def __init__(self, x):
         self.val = x
@@ -16,9 +19,9 @@ class Solution:
             print(node)
             if node is None:
                 return
-            next_node = node.next
-            node.next = next_node.next
+            next_node = ListNode(node.next.val)
             next_node.next = node
+            node.next = node.next.next
             helper(node.next)
-            return next_node
+            return node
         return helper(head)
