@@ -5,12 +5,9 @@ class ListNode:
         self.next = None
 
     def __str__(self):
-        node = self
-        string = ""
-        while node is not None:
-            string += f"{node.val}, "
-            node = node.next
-        return string
+        def helper(node, string=""):
+            return helper(node.next, string + f"{node.val}, ") if node else string
+        return helper(self)
 
 
 class Solution:
