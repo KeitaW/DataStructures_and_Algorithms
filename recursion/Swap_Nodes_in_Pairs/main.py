@@ -16,12 +16,11 @@ class ListNode:
 class Solution:
     def swapPairs(self, head: ListNode) -> ListNode:
         def helper(node):
-            print(node)
             if node is None:
                 return
             next_node = ListNode(node.next.val)
             next_node.next = node
             node.next = node.next.next
-            helper(node.next)
+            helper(node.next.next)
             return node
         return helper(head)
