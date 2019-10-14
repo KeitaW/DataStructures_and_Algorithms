@@ -1,4 +1,5 @@
 {
     "python.linting.pylintEnabled": true,
-    "python.pythonPath": "/anaconda3/envs/leetcode/bin/python"
+    "python.pythonPath": "/anaconda3/envs/leetcode/bin/python",
+    "autoDocstring.docstringFormat": "numpy"
 }

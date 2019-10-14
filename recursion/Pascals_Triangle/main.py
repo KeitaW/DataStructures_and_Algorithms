@@ -1,8 +1,9 @@
 from typing import List
+from math import factorial
 
 
 class Solution:
-    def generate(self, numRows: int) -> List[List[int]]:
+    def getRow(self, rowIndex: int) -> List[int]:
         """Given a non-negative index k where k ≤ 33, return the kth index row of the Pascal's triangle.
 
         Parameters
@@ -12,19 +13,16 @@ class Solution:
 
         Returns
         -------
-        List[List[int]]
+        List[int]
             The numRows th index row of the Pascal's triangle
 
         Notes
         ------
         You can only use O(k) extra space.
         """
-        def init(row, triangle=[]):
-            return init(row-1, [[1]*row] + triangle) if row > 0 else triangle
-        triangle = init(numRows)
 
-        for i in range(numRows):
-            for j in range(i):
-                triangle[i][j] = 1 if (j == 0 or i == j) \
-                    else triangle[i-1][j-1] + triangle[i-1][j]
-        return triangle
+        def n_combinations(n, m):
+            return int(factorial(n) / (factorial(m) * factorial(n-m)))
+        n = rowIndex
+        rows = [n_combinations(n, m-1) for m in range(1, n+2)]
+        return rows
