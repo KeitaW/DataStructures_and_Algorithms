@@ -8,7 +8,7 @@ class ListNode:
         return string + f"{self.val}, " + (self.next.__str__() if self.next else "")
 
 
-class Solution:
+class Solution_recursive:
     def __init__(self):
         self.head = None
 
@@ -25,4 +25,22 @@ class Solution:
             curr.next = prev
             flip(next, curr)
         flip(head, None)
+        return self.head
+
+
+class Solution_iterative:
+    def __init__(self):
+        self.head = None
+
+    def reverseList(self, head: ListNode) -> ListNode:
+        if head is None:
+            return None
+        curr, prev = head, None
+        while curr is not None:
+            next = curr.next
+            if next is None:
+                self.head = curr
+                curr.next = prev
+            curr.next = prev
+            curr, prev = next, curr
         return self.head
