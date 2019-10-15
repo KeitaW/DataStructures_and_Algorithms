@@ -1,5 +1,5 @@
 {
     "python.linting.pylintEnabled": true,
-    "python.pythonPath": "/anaconda3/envs/leetcode/bin/python",
+    "python.pythonPath": "/Users/kei/anaconda3/envs/Algorithms/bin/python",
     "autoDocstring.docstringFormat": "numpy"
 }
