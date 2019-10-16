@@ -45,9 +45,6 @@ class Solution:
             print(f"l2: {l2}")
             return l1
         else:
-            print("l1 > l2")
-            print(f"l1: {l1}")
-            print(f"l2: {l2}")
             l2.next = self.mergeTwoLists(l1, l2.next)
             print("l1 > l2 after")
             print(f"l1: {l1}")
