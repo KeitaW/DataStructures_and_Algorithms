@@ -51,7 +51,7 @@ class Codec:
             if data[0] == "None":
                 data.pop(0)
                 return None
-            node = TreeNode(data.pop(0))
+            node = TreeNode(int(data.pop(0)))
             node.left = r_deserialize(data)
             node.right = r_deserialize(data)
             return node
