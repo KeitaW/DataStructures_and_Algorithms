@@ -32,3 +32,11 @@ class Solution:
         nums[:pivot] = self.merge_sort(nums[:pivot])
         nums[pivot:] = self.merge_sort(nums[pivot:])
         return self.merge(nums[:pivot], nums[pivot:])
+
+    def quicksort(self, nums: List[int]):
+        if len(nums) == 0:
+            return nums
+        pivot = nums[-1]
+        left = [elem for elem in nums[:-1] if elem <= pivot]
+        right = [elem for elem in nums[:-1] if elem > pivot]
+        return self.quicksort(left) + [pivot] + self.quicksort(right)
