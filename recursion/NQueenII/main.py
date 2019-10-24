@@ -15,34 +15,35 @@ class Solution:
         """
         self.n = n
         self.rows = [True] * n
-        self.dales = [True] * n
+        self.dales = [True] * (2*(n-1) + 1)
+        self.hills = [True] * (2*(n-1) + 1)
         return self.backtrack_nqueen()
 
     def is_not_under_attack(self, row, col):
-        return rows[col] and hills[row - col] and dales[row + col]
+        return self.rows[col] and self.hills[row - col] and self.dales[row + col]
 
     def place_queen(self, row, col):
-        rows[col] = False
-        hills[row - col] = False
-        dales[row + col] = False
+        self.rows[col] = False
+        self.hills[row - col] = False
+        self.dales[row + col] = False
 
     def remove_queen(self, row, col):
-        rows[col] = True
-        hills[row - col] = True
-        dales[row + col] = True
+        self.rows[col] = True
+        self.hills[row - col] = True
+        self.dales[row + col] = True
 
     def backtrack_nqueen(self, row=0, count=0):
-        for col in range(n):
+        for col in range(self.n):
             # iterate through columns at the curent row.
             if self.is_not_under_attack(row, col):
                 # explore this partial candidate solution, and mark the attacking zone
                 self.place_queen(row, col)
-                if row + 1 == n:
+                if row + 1 == self.n:
                     # we reach the bottom, i.e. we find a solution!
                     count += 1
                 else:
                     # we move on to the next row
-                    count = self.backtrack(row + 1, count)
+                    count = self.backtrack_nqueen(row + 1, count)
                 # backtrack, i.e. remove the queen and remove the attacking zone.
                 self.remove_queen(row, col)
         return count

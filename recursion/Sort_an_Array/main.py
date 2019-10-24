@@ -3,7 +3,7 @@ from typing import List
 
 class Solution:
     def sortArray(self, nums: List[int]) -> List[int]:
-        return self.merge_sort(nums)
+        return self.quicksort(nums)
 
     def sort(self, nums: List[int]) -> List[int]:
         nums.sort()
