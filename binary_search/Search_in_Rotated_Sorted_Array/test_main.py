@@ -8,4 +8,7 @@ def test_find_rotation_index():
 
 
 def test_main():
-    pass
+    solution = Solution()
+    assert solution.search([4, 5, 6, 7, 0, 1, 2], 0) == 4
+    assert solution.search([4, 5, 6, 7, 0, 1, 2], 3) == -1
+    assert solution.search([4, 5, 1, 2, 3], 1) == 2
