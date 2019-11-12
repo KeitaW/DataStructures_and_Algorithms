@@ -1,5 +1,5 @@
 {
     "python.linting.pylintEnabled": true,
-    "python.pythonPath": "/Users/kei/anaconda3/envs/Algorithms/bin/python",
+    "python.pythonPath": "/home/kei/anaconda3/envs/ego_agent36/bin/python",
     "autoDocstring.docstringFormat": "numpy"
 }
