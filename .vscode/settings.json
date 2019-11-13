@@ -1,5 +1,5 @@
 {
     "python.linting.pylintEnabled": true,
-    "python.pythonPath": "/home/kei/anaconda3/envs/Algorithms/bin/python",
+    "python.pythonPath": "/Users/kei/anaconda3/envs/Algorithms/bin/python",
     "autoDocstring.docstringFormat": "numpy"
 }

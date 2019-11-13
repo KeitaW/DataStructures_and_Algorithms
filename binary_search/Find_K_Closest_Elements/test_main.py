@@ -15,9 +15,9 @@ def test_find_closest():
     assert find_closest([2, 2, 2], 2) == 0
 
 
-# def test_main():
-#    solution = Solution()
-#    assert solution.findClosestElements(
-#        [1, 2, 3, 4, 5], k=4, x=3) == [1, 2, 3, 4]
-#    assert solution.findClosestElements(
-#        [1, 2, 3, 4, 5], k=4, x=-1) == [1, 2, 3, 4]
+def test_main():
+    solution = Solution()
+    assert solution.findClosestElements(
+        [1, 2, 3, 4, 5], k=4, x=3) == [1, 2, 3, 4]
+    assert solution.findClosestElements(
+        [1, 2, 3, 4, 5], k=4, x=-1) == [1, 2, 3, 4]
