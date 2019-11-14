@@ -13,6 +13,9 @@ def test_find_closest():
     assert find_closest([2, 4, 6], 3) == 0
     assert find_closest([2, 4, 6], 2) == 0
     assert find_closest([2, 2, 2], 2) == 0
+    import pudb
+    pudb.set_trace()
+    assert find_closest([0, 0, 1, 2, 3, 3, 4, 7, 7, 8], 5) == 6
 
 
 def test_main():
@@ -21,3 +24,7 @@ def test_main():
         [1, 2, 3, 4, 5], k=4, x=3) == [1, 2, 3, 4]
     assert solution.findClosestElements(
         [1, 2, 3, 4, 5], k=4, x=-1) == [1, 2, 3, 4]
+    assert solution.findClosestElements(
+        [1, 2, 2, 2, 5, 5, 5, 8, 9, 9], k=4, x=0) == [1, 2, 2, 2]
+    assert solution.findClosestElements(
+        [0, 0, 1, 2, 3, 3, 4, 7, 7, 8], k=3, x=5) == [3, 3, 4]
