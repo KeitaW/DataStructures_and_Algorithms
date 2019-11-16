@@ -40,20 +40,13 @@ class Solution:
 
 
 def find_closest(arr: List[int], x: int):
-    # https://programming-place.net/ppp/contents/algorithm/search/004.html#for_redundant
-    # バグがある
     def binary_search(left, right):
         # Find the left most element
-        pivot = (left + right) // 2
         if left == right:
             return left
-        if arr[pivot] < x and abs(arr[pivot + 1] - x) < abs(arr[pivot] - x):
+        pivot = (left + right) // 2
+        if arr[pivot] < x:
             return binary_search(pivot + 1, right)
         else:
             return binary_search(left, pivot)
-
-    closest = binary_search(0, len(arr) - 1)
-    left = closest
-    while left >= 1 and abs(arr[left-1]-x) == abs(arr[closest]-x):
-        left -= 1
-    return left
+    return binary_search(0, len(arr) - 1)
