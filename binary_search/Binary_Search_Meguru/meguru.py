@@ -122,6 +122,24 @@ def find_closest(arr: List[int], target: int) -> int:
         return ub if abs(arr[ub] - target) < abs(arr[lb] - target) else lb
 
 
+def find_k_closest(arr: List[int], target: int, k: int) -> int:
+    closest = find_closest(arr, target)
+    counter = k - 1
+    left, right = closest, closest + 1
+    while counter >= 0 and left >= 0 and right + 1 <= len(arr) - 1:
+        if abs(arr[left - 1] - target) < abs(arr[right + 1] - target):
+            left -= 1
+        else:
+            right += 1
+        counter -= 1
+    for _ in range(counter - 1):
+        if left >= 0:
+            left -= 1
+        else:
+            right += 1
+    return arr[left:(right+1)]
+
+
 if __name__ == "__main__":
     arr = [1, 2, 3, 4, 5]
     print(f"arr: {arr}, target: {2}, lower bound: {lower_bound(arr, 2)}")
@@ -179,3 +197,11 @@ if __name__ == "__main__":
     arr = [1, 2, 2, 2, 4, 4, 4]
     target = 3
     print(f"arr: {arr}, target: {target}, closest: {find_closest(arr, target)}")
+
+    arr = [1, 2, 100, 101, 102]
+    target = 99
+    k = 3
+    import pdb
+    pdb.set_trace()
+    print(
+        f"arr: {arr}, target: {target}, k: {k}, k closest: {find_k_closest(arr, target, k)}")
