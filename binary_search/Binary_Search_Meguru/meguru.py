@@ -100,6 +100,28 @@ def find_rightmost(arr: List[int], target: int) -> int:
     return ub if (ub == -1 or arr[ub] == target) else -1
 
 
+def find_closest(arr: List[int], target: int) -> int:
+    """Return the leftmost closest elemnet
+
+    Parameters
+    ----------
+    arr : List[int]
+    target : int
+
+    Returns
+    -------
+    int
+    """
+    ub = upper_bound(arr, target)
+    lb = lower_bound(arr, target)
+    if ub == -1:
+        return lb
+    elif lb == -1:
+        return ub
+    else:
+        return ub if abs(arr[ub] - target) < abs(arr[lb] - target) else lb
+
+
 if __name__ == "__main__":
     arr = [1, 2, 3, 4, 5]
     print(f"arr: {arr}, target: {2}, lower bound: {lower_bound(arr, 2)}")
@@ -135,3 +157,25 @@ if __name__ == "__main__":
     print(f"arr: {arr}, target: {2}, find rightmost: {find_rightmost(arr, 2)}")
     arr = [1, 1, 2, 2, 3, 4, 5]
     print(f"arr: {arr}, target: {0}, find rightmost: {find_rightmost(arr, 0)}")
+
+    arr = [1, 2, 100, 101, 102]
+    target = 99
+    print(f"arr: {arr}, target: {target}, closest: {find_closest(arr, target)}")
+    arr = [1, 2, 100, 101, 102]
+    target = 200
+    print(f"arr: {arr}, target: {target}, closest: {find_closest(arr, target)}")
+    arr = [1, 2, 100, 101, 102]
+    target = 10
+    print(f"arr: {arr}, target: {target}, closest: {find_closest(arr, target)}")
+    arr = [1, 2, 100, 101, 102]
+    target = -1
+    print(f"arr: {arr}, target: {target}, closest: {find_closest(arr, target)}")
+    arr = [2, 2, 2]
+    target = 2
+    print(f"arr: {arr}, target: {target}, closest: {find_closest(arr, target)}")
+    arr = [1, 2, 2, 2]
+    target = 2
+    print(f"arr: {arr}, target: {target}, closest: {find_closest(arr, target)}")
+    arr = [1, 2, 2, 2, 4, 4, 4]
+    target = 3
+    print(f"arr: {arr}, target: {target}, closest: {find_closest(arr, target)}")
