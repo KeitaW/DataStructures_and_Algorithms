@@ -1,52 +1,27 @@
-from typing import List
-
-
 class Solution:
-    def findClosestElements(self, arr: List[int], k: int, x: int) -> List[int]:
-        """ Given a sorted array, two integers k and x, find the k closest elements to x in the array.
-        The result should also be sorted in ascending order. If there is a tie, the smaller elements are always preferred.
-
-        Parameters
-        ----------
-        arr : List[int]
-        k : int
-        x : int
-
-        Returns
-        -------
-        List[int]
+    def findClosestElements(self, arr, k, x):
         """
-        closest_idx = find_closest(arr, x)
-        left, right = closest_idx - 1, closest_idx + 1
-        closests = [arr[closest_idx]]
-        counter = 1
-        while left >= 0 and right <= len(arr) - 1 and counter < k:
-            if abs(arr[left] - x) <= abs(arr[right] - x):
-                closests.insert(0, arr[left])
-                left -= 1
+        :type arr: List[int]
+        :type k: int
+        :type x: int
+        :rtype: List[int]
+        """
+
+        # approach: use binary search to find the start which is closest to x
+
+        left = 0
+        right = len(arr) - k
+
+        while left < right:
+            mid = left + (right - left) // 2
+
+            # mid + k is closer to x, discard mid by assigning left = mid + 1
+            if x - arr[mid] > arr[mid + k] - x:
+                left = mid + 1
+
+            # mid is equal or closer to x than mid + k, remains mid as candidate
             else:
-                closests.append(arr[right])
-                right += 1
-            counter += 1
-        while left >= 0 and counter < k:
-            closests.insert(0, arr[left])
-            left -= 1
-            counter += 1
-        while right <= len(arr) - 1 and counter < k:
-            closests.append(arr[right])
-            right += 1
-            counter += 1
-        return closests
+                right = mid
 
-
-def find_closest(arr: List[int], x: int):
-    def binary_search(left, right):
-        # Find the left most element
-        if left == right:
-            return left
-        pivot = (left + right) // 2
-        if arr[pivot] < x:
-            return binary_search(pivot + 1, right)
-        else:
-            return binary_search(left, pivot)
-    return binary_search(0, len(arr) - 1)
+        # left == right, which makes both left and left + k have same diff with x
+        return arr[left: left + k]
