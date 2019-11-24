@@ -21,7 +21,7 @@ def binary_search_meguru_recur(f: Callable[[int], bool], ok: int, ng: int) -> in
     edge = ok
 
     def search(ok, ng):
-        mid = (ok + ng) // 2
+        mid = ok + (ng - ok) // 2
         return (
             ok if abs(ok - ng) <= 1 else
             search(mid, ng) if f(mid) else
@@ -46,7 +46,7 @@ def binary_search_meguru(f: Callable[[int], bool], ok: int, ng: int) -> int:
     """
     edge = ok
     while abs(ok - ng) > 1:
-        mid = (ok + ng) // 2
+        mid = ok + (ng - ok) // 2
         if f(mid):
             ok = mid
         else:
@@ -91,10 +91,10 @@ def upper_bound(arr: List[int], target: int) -> int:
 
 
 def find_k_closest(arr: List[int], target: int, k: int) -> int:
-    ng, ok = -1, len(arr) - k
+    ng, ok = -1, len(arr) - k + 1
+    # +1: is needed some case such as [1, 2, 3, 4, 5], 3, 4
     ok = binary_search_meguru(
-        lambda x: target - arr[x] <= arr[x + k] - target, ok, ng)
-    print(ok)
+        lambda x: target - arr[x] <= arr[x + k - 1] - target + 1, ok, ng)
     return arr[ok:(ok+k)]
 
 
@@ -170,8 +170,6 @@ if __name__ == "__main__":
     # target = 3
     # print(f"arr: {arr}, target: {target}, closest: {find_closest(arr, target)}")
 
-    import pudb
-    pudb.set_trace()
     arr = [1, 2, 100, 101, 102]
     target = 99
     k = 3

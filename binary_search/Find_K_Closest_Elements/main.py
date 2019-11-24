@@ -1,27 +1,51 @@
+from typing import List, Callable
+
+
 class Solution:
     def findClosestElements(self, arr, k, x):
-        """
-        :type arr: List[int]
-        :type k: int
-        :type x: int
-        :rtype: List[int]
-        """
+        ok = 0
+        ng = len(arr) - k
+        ok = binary_search_meguru(
+            lambda mid: x - arr[mid] >= arr[mid + k] - x, ok, ng)
+        print("ok, ", ok)
+        while ok >= 1 and x - arr[ok] == arr[ok + k - 1] - x:
+            ok -= 1
+        return arr[ok: ok + k]
 
-        # approach: use binary search to find the start which is closest to x
+    def afindClosestElements(self, arr, k, x):
+        ok = 0
+        ng = len(arr) - k
 
-        left = 0
-        right = len(arr) - k
-
-        while left < right:
-            mid = left + (right - left) // 2
-
-            # mid + k is closer to x, discard mid by assigning left = mid + 1
-            if x - arr[mid] > arr[mid + k] - x:
-                left = mid + 1
-
-            # mid is equal or closer to x than mid + k, remains mid as candidate
+        while abs(ok - ng) > 1:
+            mid = ok + (ng - ok) // 2
+            if x - arr[mid] >= arr[mid + k] - x:
+                ok = mid
             else:
-                right = mid
+                ng = mid
 
-        # left == right, which makes both left and left + k have same diff with x
-        return arr[left: left + k]
+        while ok >= 1 and x - arr[ok] == arr[ok + k - 1] - x:
+            ok -= 1
+        return arr[ok: ok + k]
+
+
+def binary_search_meguru(f: Callable[[int], bool], ok: int, ng: int) -> int:
+    """General purpose binary search algorithm
+
+    Parameters
+    ----------
+    f : Callable[[int], int]
+    ok : int
+    ng : int
+
+    Returns
+    -------
+    int
+    """
+    edge = ok
+    while abs(ok - ng) > 1:
+        mid = ok + (ng - ok) // 2
+        if f(mid):
+            ok = mid
+        else:
+            ng = mid
+    return ok if ok != edge else -1
