@@ -44,14 +44,13 @@ def binary_search_meguru(f: Callable[[int], bool], ok: int, ng: int) -> int:
     -------
     int
     """
-    edge = ok
     while abs(ok - ng) > 1:
         mid = ok + (ng - ok) // 2
         if f(mid):
             ok = mid
         else:
             ng = mid
-    return ok if ok != edge else -1
+    return ok
 
 
 def lower_bound(arr: List[int], target: int) -> int:
@@ -69,7 +68,8 @@ def lower_bound(arr: List[int], target: int) -> int:
         index of the minimum element. -1 if all the elements are less than target
     """
     ng, ok = -1, len(arr)
-    return binary_search_meguru(lambda x: arr[x] >= target, ok, ng)
+    ok = binary_search_meguru(lambda x: arr[x] >= target, ok, ng)
+    return ok if ok != len(arr) else -1
 
 
 def upper_bound(arr: List[int], target: int) -> int:
@@ -87,19 +87,35 @@ def upper_bound(arr: List[int], target: int) -> int:
         index of the minimum element. -1 if all the elements are more than target
     """
     ng, ok = len(arr), -1
-    return binary_search_meguru(lambda x: arr[x] <= target, ok, ng)
-
-
-def find_k_closest(arr: List[int], target: int, k: int) -> int:
-    ng, ok = -1, len(arr) - k + 1
-    # +1: is needed some case such as [1, 2, 3, 4, 5], 3, 4
-    ok = binary_search_meguru(
-        lambda x: target - arr[x] <= arr[x + k - 1] - target + 1, ok, ng)
-    return arr[ok:(ok+k)]
+    ok = binary_search_meguru(lambda x: arr[x] <= target, ok, ng)
+    return ok if ok != -1 else -1
 
 
 def find_closest(arr: List[int], target: int) -> int:
-    return find_k_closest(arr, target, 1)
+    ub = upper_bound(arr, target)
+    lb = lower_bound(arr, target)
+    return ub if abs(arr[ub] - target) <= abs(arr[lb] - target) else lb
+
+
+def find_k_closest(arr: List[int], target: int, k: int) -> int:
+    left = find_closest(arr, target)
+    right = left
+
+    def next_lr(left, right):
+        next_left = max(0, left - 1)
+        next_right = min(right + 1, len(arr) - 1)
+        if right == next_right:
+            return (next_left, right)
+        if left == next_left:
+            return (left, next_right)
+        if abs(arr[next_left] - target) <= abs(arr[next_right] - target):
+            return (next_left, right)
+        else:
+            return (left, next_right)
+
+    for _ in range(k-1):
+        left, right = next_lr(left, right)
+    return arr[left:(right+1)]
 
 
 def find_leftmost(arr: List[int], target: int) -> int:
@@ -113,62 +129,62 @@ def find_rightmost(arr: List[int], target: int) -> int:
 
 
 if __name__ == "__main__":
-    # arr = [1, 2, 3, 4, 5]
-    # print(f"arr: {arr}, target: {2}, lower bound: {lower_bound(arr, 2)}")
-    # arr = [1, 2, 3, 4, 5]
-    # print(f"arr: {arr}, target: {100}, lower bound: {lower_bound(arr, 100)}")
-    # arr = [1, 2, 3, 4, 5]
-    # print(f"arr: {arr}, target: {0}, lower bound: {lower_bound(arr, 0)}")
-    # arr = [1, 1, 2, 2, 3, 4, 5]
-    # print(f"arr: {arr}, target: {2}, lower bound: {lower_bound(arr, 2)}")
-    # arr = [2, 2, 2]
-    # print(f"arr: {arr}, target: {2}, lower bound: {lower_bound(arr, 2)}")
-    # arr = [2, 2, 2]
-    # print(f"arr: {arr}, target: {1}, lower bound: {lower_bound(arr, 1)}")
+    arr = [1, 2, 3, 4, 5]
+    print(f"arr: {arr}, target: {2}, lower bound: {lower_bound(arr, 2)}")
+    arr = [1, 2, 3, 4, 5]
+    print(f"arr: {arr}, target: {100}, lower bound: {lower_bound(arr, 100)}")
+    arr = [1, 2, 3, 4, 5]
+    print(f"arr: {arr}, target: {0}, lower bound: {lower_bound(arr, 0)}")
+    arr = [1, 1, 2, 2, 3, 4, 5]
+    print(f"arr: {arr}, target: {2}, lower bound: {lower_bound(arr, 2)}")
+    arr = [2, 2, 2]
+    print(f"arr: {arr}, target: {2}, lower bound: {lower_bound(arr, 2)}")
+    arr = [2, 2, 2]
+    print(f"arr: {arr}, target: {1}, lower bound: {lower_bound(arr, 1)}")
 
-    # arr = [1, 2, 3, 4, 5]
-    # print(f"arr: {arr}, target: {2}, upper bound: {upper_bound(arr, 2)}")
-    # arr = [1, 2, 3, 4, 5]
-    # print(f"arr: {arr}, target: {100}, upper bound: {upper_bound(arr, 100)}")
-    # arr = [1, 2, 3, 4, 5]
-    # print(f"arr: {arr}, target: {0}, upper bound: {upper_bound(arr, 0)}")
-    # arr = [1, 1, 2, 2, 3, 4, 5]
-    # print(f"arr: {arr}, target: {2}, upper bound: {upper_bound(arr, 2)}")
-    # arr = [2, 2, 2]
-    # print(f"arr: {arr}, target: {2}, upper bound: {upper_bound(arr, 2)}")
-    # arr = [2, 2, 2]
-    # print(f"arr: {arr}, target: {1}, upper bound: {upper_bound(arr, 1)}")
+    arr = [1, 2, 3, 4, 5]
+    print(f"arr: {arr}, target: {2}, upper bound: {upper_bound(arr, 2)}")
+    arr = [1, 2, 3, 4, 5]
+    print(f"arr: {arr}, target: {100}, upper bound: {upper_bound(arr, 100)}")
+    arr = [1, 2, 3, 4, 5]
+    print(f"arr: {arr}, target: {0}, upper bound: {upper_bound(arr, 0)}")
+    arr = [1, 1, 2, 2, 3, 4, 5]
+    print(f"arr: {arr}, target: {2}, upper bound: {upper_bound(arr, 2)}")
+    arr = [2, 2, 2]
+    print(f"arr: {arr}, target: {2}, upper bound: {upper_bound(arr, 2)}")
+    arr = [2, 2, 2]
+    print(f"arr: {arr}, target: {1}, upper bound: {upper_bound(arr, 1)}")
 
-    # arr = [1, 1, 2, 2, 3, 4, 5]
-    # print(f"arr: {arr}, target: {2}, find leftmost: {find_leftmost(arr, 2)}")
-    # arr = [1, 1, 2, 2, 3, 4, 5]
-    # print(f"arr: {arr}, target: {0}, find leftmost: {find_leftmost(arr, 0)}")
-    # arr = [1, 1, 2, 2, 3, 4, 5]
-    # print(f"arr: {arr}, target: {2}, find rightmost: {find_rightmost(arr, 2)}")
-    # arr = [1, 1, 2, 2, 3, 4, 5]
-    # print(f"arr: {arr}, target: {0}, find rightmost: {find_rightmost(arr, 0)}")
+    arr = [1, 1, 2, 2, 3, 4, 5]
+    print(f"arr: {arr}, target: {2}, find leftmost: {find_leftmost(arr, 2)}")
+    arr = [1, 1, 2, 2, 3, 4, 5]
+    print(f"arr: {arr}, target: {0}, find leftmost: {find_leftmost(arr, 0)}")
+    arr = [1, 1, 2, 2, 3, 4, 5]
+    print(f"arr: {arr}, target: {2}, find rightmost: {find_rightmost(arr, 2)}")
+    arr = [1, 1, 2, 2, 3, 4, 5]
+    print(f"arr: {arr}, target: {0}, find rightmost: {find_rightmost(arr, 0)}")
 
-    # arr = [1, 2, 100, 101, 102]
-    # target = 99
-    # print(f"arr: {arr}, target: {target}, closest: {find_closest(arr, target)}")
-    # arr = [1, 2, 100, 101, 102]
-    # target = 200
-    # print(f"arr: {arr}, target: {target}, closest: {find_closest(arr, target)}")
-    # arr = [1, 2, 100, 101, 102]
-    # target = 10
-    # print(f"arr: {arr}, target: {target}, closest: {find_closest(arr, target)}")
-    # arr = [1, 2, 100, 101, 102]
-    # target = -1
-    # print(f"arr: {arr}, target: {target}, closest: {find_closest(arr, target)}")
-    # arr = [2, 2, 2]
-    # target = 2
-    # print(f"arr: {arr}, target: {target}, closest: {find_closest(arr, target)}")
-    # arr = [1, 2, 2, 2]
-    # target = 2
-    # print(f"arr: {arr}, target: {target}, closest: {find_closest(arr, target)}")
-    # arr = [1, 2, 2, 2, 4, 4, 4]
-    # target = 3
-    # print(f"arr: {arr}, target: {target}, closest: {find_closest(arr, target)}")
+    arr = [1, 2, 100, 101, 102]
+    target = 99
+    print(f"arr: {arr}, target: {target}, closest: {find_closest(arr, target)}")
+    arr = [1, 2, 100, 101, 102]
+    target = 200
+    print(f"arr: {arr}, target: {target}, closest: {find_closest(arr, target)}")
+    arr = [1, 2, 100, 101, 102]
+    target = 10
+    print(f"arr: {arr}, target: {target}, closest: {find_closest(arr, target)}")
+    arr = [1, 2, 100, 101, 102]
+    target = -1
+    print(f"arr: {arr}, target: {target}, closest: {find_closest(arr, target)}")
+    arr = [2, 2, 2]
+    target = 2
+    print(f"arr: {arr}, target: {target}, closest: {find_closest(arr, target)}")
+    arr = [1, 2, 2, 2]
+    target = 2
+    print(f"arr: {arr}, target: {target}, closest: {find_closest(arr, target)}")
+    arr = [1, 2, 2, 2, 4, 4, 4]
+    target = 3
+    print(f"arr: {arr}, target: {target}, closest: {find_closest(arr, target)}")
 
     arr = [1, 2, 100, 101, 102]
     target = 99
@@ -191,5 +207,17 @@ if __name__ == "__main__":
     arr = [1, 2, 3, 4, 5]
     target = -1
     k = 4
+    print(
+        f"arr: {arr}, target: {target}, k: {k}, k closest: {find_k_closest(arr, target, k)}")
+
+    arr = [1, 2, 3, 4, 5]
+    target = 3
+    k = 4
+    print(
+        f"arr: {arr}, target: {target}, k: {k}, k closest: {find_k_closest(arr, target, k)}")
+
+    arr = [0, 1, 2, 2, 2, 3, 6, 8, 8, 9]
+    target = 9
+    k = 5
     print(
         f"arr: {arr}, target: {target}, k: {k}, k closest: {find_k_closest(arr, target, k)}")

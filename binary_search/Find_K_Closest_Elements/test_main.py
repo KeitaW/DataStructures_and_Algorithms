@@ -20,6 +20,7 @@ from binary_search.Find_K_Closest_Elements.main import Solution
 
 def test_main():
     solution = Solution()
+    print("start")
     assert solution.findClosestElements(
         [1, 2], k=1, x=1) == [1]
     assert solution.findClosestElements(
@@ -28,7 +29,9 @@ def test_main():
         [1, 2, 3, 4, 5], k=4, x=-1) == [1, 2, 3, 4]
     assert solution.findClosestElements(
         [1, 2, 2, 2, 5, 5, 5, 8, 9, 9], k=4, x=0) == [1, 2, 2, 2]
-    import pudb
-    pudb.set_trace()
     assert solution.findClosestElements(
         [0, 0, 1, 2, 3, 3, 4, 7, 7, 7, 8], k=3, x=5) == [3, 3, 4]
+    assert solution.findClosestElements(
+        [0, 0, 0, 1, 3, 5, 6, 7, 8, 8], k=2, x=2) == [1, 3]
+    assert solution.findClosestElements(
+        [0, 1, 2, 2, 2, 3, 6, 8, 8, 9], k=5, x=9) == [3, 6, 8, 8, 9]
