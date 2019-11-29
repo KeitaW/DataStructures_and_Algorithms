@@ -7,3 +7,5 @@ def test_main():
     assert solution.findPeakElement(
         [1, 2, 1, 3, 5, 6, 4]) == 1 or solution.findPeakElement([1, 2, 1, 3, 5, 6, 4]) == 5
     assert solution.findPeakElement([1, 2]) == 1
+    assert solution.findPeakElement([2, 1]) == 0
+    assert solution.findPeakElement([1]) == 0
