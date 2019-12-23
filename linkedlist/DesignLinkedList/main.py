@@ -24,7 +24,7 @@ class MyLinkedList:
             else:
                 recur(index+1, string + str(self.get(index+1)))
 
-        return recur(0c, str(self.get(0)))
+        return recur(0, str(self.get(0)))
 
     def get(self, index: int) -> int:
         """
