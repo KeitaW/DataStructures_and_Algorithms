@@ -18,13 +18,13 @@ class MyLinkedList:
         if not self.head:
             return ""
 
-        def recur(index, string):
-            if index == self.size - 1:
+        def recur(node, string):
+            if not node.next_node:
                 return string
             else:
-                return recur(index+1, string + ", " + str(self.get(index+1)))
+                return recur(node.next_node, string + ", " + str(node.next_node.val))
 
-        return recur(0, str(self.get(0)))
+        return recur(self.head, str(self.head.val))
 
     def get(self, index: int) -> int:
         """
@@ -33,7 +33,7 @@ class MyLinkedList:
         if index < 0 or index >= self.size:
             return -1
         node = self.head
-        for _ in range(index - 1):
+        for _ in range(index):
             node = node.next_node
         return node.val
 
@@ -46,12 +46,12 @@ class MyLinkedList:
         node = self.head
         new_node = Node(val)
         if index == 0:
-            new_node.next = node
+            new_node.next_node = node
             self.head = new_node
         else:
             for _ in range(index - 1):
                 node = node.next_node
-            new_node.next = node.next_node
+            new_node.next_node = node.next_node
             node.next_node = new_node
         self.size += 1
 
