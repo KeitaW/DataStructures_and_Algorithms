@@ -19,10 +19,10 @@ class MyLinkedList:
             return ""
 
         def recur(index, string):
-            if self.size == index:
+            if index == self.size - 1:
                 return string
             else:
-                recur(index+1, string + str(self.get(index+1)))
+                return recur(index+1, string + ", " + str(self.get(index+1)))
 
         return recur(0, str(self.get(0)))
 
