@@ -13,15 +13,16 @@ class Solution:
         self.head = None
 
     def reverseList(self, head: ListNode) -> ListNode:
-        if head is None or head.next is None:
-            return head
-        # Current Head and Previous Head
-        curr, prev = head.next, head
-        while curr is not None:
-            next = curr.next
-            if next is None:
-                # End of List
+        if head is None:
+            return None
+
+        def flip(curr: ListNode, prev: ListNode):
+            if curr.next is None:
                 self.head = curr
+                curr.next = prev
+                return
+            next = curr.next
             curr.next = prev
-            curr, prev = next, curr
+            flip(next, curr)
+        flip(head, None)
         return self.head
