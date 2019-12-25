@@ -13,8 +13,6 @@ class Solution:
         self.head = None
 
     def removeElements(self, head: ListNode, val: int) -> ListNode:
-        if head is None:
-            return head
         self.head = head
         while (self.head is not None) and (self.head.val == val):
             self.head = self.head.next
