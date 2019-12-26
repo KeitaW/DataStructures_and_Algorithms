@@ -30,13 +30,13 @@ class Solution:
         """
         if (head is None) or (head.next is None):
             return head
-        peri, post = head, head.next
-        con = head.next
-        while post is not None and post.next is not None:
-            peri.next = post.next
-            peri = peri.next
+        odd, even = head, head.next
+        first_even = head.next
+        while even is not None and even.next is not None:
+            odd.next = even.next
+            odd = odd.next
 
-            post.next = peri.next
-            post = post.next
-        peri.next = con
+            even.next = odd.next
+            even = even.next
+        odd.next = first_even
         return head
