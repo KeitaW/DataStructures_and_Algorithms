@@ -32,7 +32,7 @@ def reverse_list(head: ListNode):
         peri.next = pre
         pre = peri
         peri = post
-    head = pre
+    return pre
 
 
 class Solution:
@@ -49,6 +49,9 @@ class Solution:
         -------
         bool
         """
-        tail = head
-        while tail.next is not None:
-            tail = tail.next
+        if head is None or head.next is None:
+            return True
+        mid = find_middle(head)
+        first_half = head
+        second_half = reverse_list(mid)
+        return compare_list(first_half, second_half)
