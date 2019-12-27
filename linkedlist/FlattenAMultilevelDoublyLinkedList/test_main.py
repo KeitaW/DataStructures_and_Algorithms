@@ -4,7 +4,7 @@ from linkedlist.FlattenAMultilevelDoublyLinkedList.main import Solution, Node
 def range_linked_list(start=0, end=4):
     head = node = Node(-1)
     prev = None
-    for i in range(0, 4):
+    for i in range(start, end):
         node.next = Node(i)
         node.prev = prev
         prev = node
@@ -18,3 +18,10 @@ def test_range_linked_list():
     assert head.next.val == 1
     assert head.next.next.val == 2
     assert head.next.next.next.val == 3
+    head = range_linked_list(start=3, end=5)
+    assert head.val == 3
+    assert head.next.val == 4
+
+
+def test_main():
+    head1 = range_linked_list(1, 6)

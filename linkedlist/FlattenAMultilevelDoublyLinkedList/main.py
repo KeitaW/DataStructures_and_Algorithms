@@ -5,6 +5,9 @@ class Node:
         self.next = next
         self.child = child
 
+    def __str__(self, string=""):
+        return string + f"{self.val}, " + (self.next.__str__() if self.next else "")
+
 
 class Solution:
     def flatten(self, head: Node) -> Node:
