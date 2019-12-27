@@ -24,4 +24,8 @@ def test_range_linked_list():
 
 
 def test_main():
-    head1 = range_linked_list(1, 6)
+    head1 = range_linked_list(1, 7)
+    head2 = range_linked_list(7, 11)
+    head3 = range_linked_list(11, 13)
+    head1.next.next.child = head2
+    head2.next.child = head3
