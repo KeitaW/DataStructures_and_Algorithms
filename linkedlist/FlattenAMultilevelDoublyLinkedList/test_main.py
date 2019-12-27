@@ -29,3 +29,9 @@ def test_main():
     head3 = range_linked_list(11, 13)
     head1.next.next.child = head2
     head2.next.child = head3
+    solution = Solution()
+    solution.flatten(head1)
+    node = head1
+    for val in [1, 2, 3, 7, 8, 11, 12, 9, 10, 4, 5, 6]:
+        assert node.val == val
+        node = node.next
