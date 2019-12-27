@@ -28,4 +28,21 @@ class Solution:
         Node
             [description]
         """
-        pass
+        if head is None:
+            return head
+        # Pseudo head
+        flatten = Node(-1, None, head, None)
+        curr, prev = head, flatten
+        stack = [head]
+        while stack:
+            curr = stack.pop(-1)
+            prev.next = curr
+            curr.prev = prev
+            if curr.next is not None:
+                stack.append(curr.next)
+            if curr.child is not None:
+                stack.append(curr.child)
+                curr.child = None
+            prev = curr
+        flatten.next.prev = None
+        return flatten.next
