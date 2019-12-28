@@ -1,4 +1,4 @@
-from typing import Generator
+from typing import List, Generator
 from queue import Queue
 
 NDIGITS = 4
