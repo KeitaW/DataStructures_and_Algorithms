@@ -16,6 +16,7 @@ class Solution:
         for r, c in product(range(nrow), range(ncol)):
             if grid[r][c] == LAND:
                 num_islands += 1
+                grid[r][c] = WATER
                 neighbors.put((r, c))
             while not neighbors.empty():
                 row, col = neighbors.get()
@@ -27,7 +28,9 @@ class Solution:
                     grid[row + 1][col] = WATER
                 if col - 1 >= 0 and grid[row][col - 1] == LAND:
                     neighbors.put((row, col - 1))
+                    grid[row][col - 1] = WATER
                 if col + 1 <= ncol - 1 and grid[row][col + 1] == LAND:
                     neighbors.put((row, col + 1))
+                    grid[row][col + 1] = WATER
         return num_islands
 
