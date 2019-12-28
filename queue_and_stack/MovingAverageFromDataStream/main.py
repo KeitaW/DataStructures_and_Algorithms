@@ -1,5 +1,4 @@
 class MyCircularQueue:
-
     def __init__(self, k: int):
         """
         Initialize your data structure here. Set the size of the queue to be k.
@@ -67,18 +66,23 @@ class MyCircularQueue:
 # param_5 = obj.isEmpty()
 # param_6 = obj.isFull()
 
-class MovingAverage:
 
+class MovingAverage:
     def __init__(self, size: int):
         """
         Initialize your data structure here.
 
         """
-        circular_queue = 
+        self.circular_queue = MyCircularQueue(size)
 
     def next(self, val: int) -> float:
-        pass
-        
+        if self.circular_queue.count == self.circular_queue.capacity:
+            self.circular_queue.deQueue()
+        self.circular_queue.enQueue(val)
+        return [
+            self.circular_queue.queue[(self.head + i) % self.capacity]
+            for i in range(self.circular_queue.count)
+        ] / self.circular_queue.count
 
 
 # Your MovingAverage object will be instantiated and called as such:
