@@ -40,4 +40,4 @@ class Solution:
                 queue.put((row, col - 1))
             if col < width - 1 and rooms[row][col + 1] == EMPTY:
                 rooms[row][col + 1] = rooms[row][col] + 1
-                queue.put((row, col - 1))
+                queue.put((row, col + 1))
