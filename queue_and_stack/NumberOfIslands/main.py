@@ -8,6 +8,26 @@ WATER = "0"
 
 class Solution:
     def numIslands(self, grid: List[List[str]]) -> int:
+        """Given a 2d grid map of '1's (land) and '0's (water), count the number of islands.
+        An island is surrounded by water and is formed by connecting adjacent lands horizontally or vertically.
+        You may assume all four edges of the grid are all surrounded by water.
+
+        Input:
+        11110
+        11010
+        11000
+        00000
+
+        Output: 1
+        
+        Parameters
+        ----------
+        grid : List[List[str]]
+        
+        Returns
+        -------
+        int
+        """
         if len(grid) == 0:
             return 0
         nrow, ncol = len(grid), len(grid[0])
