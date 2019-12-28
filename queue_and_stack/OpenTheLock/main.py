@@ -31,7 +31,7 @@ class Solution:
                 digit = int(digits[i])
                 for diff in [1, -1]:
                     next_digit = (digit + diff) % 10
-                    yield digits[:i] + str(next_digit) + digits[i:]
+                    yield digits[:i] + str(next_digit) + digits[i + 1 :]
 
         deadends = set(deadends)
         digits = "0000"
