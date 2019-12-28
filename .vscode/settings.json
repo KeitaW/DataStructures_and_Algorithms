@@ -1,6 +1,8 @@
 {
-    "python.linting.pylintEnabled": true,
-    "python.pythonPath": "/Users/kei/.pyenv/versions/anaconda3-5.0.0/envs/Algorithms/bin/python",
+    "python.linting.pylintEnabled": false,
+    "python.pythonPath": "/Users/kei/anaconda3/envs/Algorithms/bin/python",
     "autoDocstring.docstringFormat": "numpy",
-    "python.formatting.provider": "black"
+    "python.formatting.provider": "black",
+    "python.linting.flake8Enabled": true,
+    "python.linting.enabled": true
 }
