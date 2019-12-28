@@ -29,11 +29,15 @@ class Solution:
                     queue.put((row, col))
         while not queue.empty():
             row, col = queue.get()
-            for direction in DIRECTIONS:
-                pass
-
-            if (r < 0 || c < 0 || r >= m || c >= n || rooms[r][c] != EMPTY) {
-                continue;
-            }
-            rooms[r][c] = rooms[row][col] + 1;
-            q.add(new int[] { r, c });
+            if row > 0 and rooms[row - 1][col] == EMPTY:
+                rooms[row - 1][col] = rooms[row][col] + 1
+                queue.put((row - 1, col))
+            if row < height - 1 and rooms[row + 1][col] == EMPTY:
+                rooms[row + 1][col] = rooms[row][col] + 1
+                queue.put((row + 1, col))
+            if col > 0 and rooms[row][col - 1] == EMPTY:
+                rooms[row][col - 1] = rooms[row][col] + 1
+                queue.put((row, col - 1))
+            if col < width - 1 and rooms[row][col + 1] == EMPTY:
+                rooms[row][col + 1] = rooms[row][col] + 1
+                queue.put((row, col - 1))
