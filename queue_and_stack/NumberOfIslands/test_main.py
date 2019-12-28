@@ -1,4 +1,4 @@
-from queue_and_stack.NumberOfIslands import Solution
+from queue_and_stack.NumberOfIslands.main import Solution
 
 
 def test_main():
@@ -9,7 +9,7 @@ def test_main():
         ["0", "0", "0", "0", "0"],
     ]
     solution = Solution()
-    assert solution.NumberOfIslands(grid) == 1
+    assert solution.numIslands(grid) == 1
 
     grid = [
         ["1", "1", "0", "0", "0"],
@@ -18,5 +18,5 @@ def test_main():
         ["0", "0", "0", "1", "1"],
     ]
     solution = Solution()
-    assert solution.NumberOfIslands(grid) == 3
+    assert solution.numIslands(grid) == 3
 
