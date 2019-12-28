@@ -79,10 +79,17 @@ class MovingAverage:
         if self.circular_queue.count == self.circular_queue.capacity:
             self.circular_queue.deQueue()
         self.circular_queue.enQueue(val)
-        return [
-            self.circular_queue.queue[(self.head + i) % self.capacity]
-            for i in range(self.circular_queue.count)
-        ] / self.circular_queue.count
+        return (
+            sum(
+                [
+                    self.circular_queue.queue[
+                        (self.circular_queue.head + i) % self.circular_queue.capacity
+                    ]
+                    for i in range(self.circular_queue.count)
+                ]
+            )
+            / self.circular_queue.count
+        )
 
 
 # Your MovingAverage object will be instantiated and called as such:
