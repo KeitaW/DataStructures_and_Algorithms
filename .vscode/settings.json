@@ -4,5 +4,8 @@
     "autoDocstring.docstringFormat": "numpy",
     "python.formatting.provider": "black",
     "python.linting.flake8Enabled": true,
-    "python.linting.enabled": true
+    "python.linting.enabled": true,
+    "cSpell.words": [
+        "itertools"
+    ]
 }
