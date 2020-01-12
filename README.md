@@ -1,2 +1,2 @@
-# DataStructures_and_Algorithms
+# DataStructures and Algorithms
 Personal notes on Data Structures and Algorithms. 
