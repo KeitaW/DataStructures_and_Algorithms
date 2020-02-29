@@ -5,7 +5,7 @@ from setuptools import find_packages
 #    long_description = f.read()
 
 setup(
-    name="Data Structures and Algorithms in Python",
+    name="LeetCode",
     version="develop",
     description="Log of programming exercises",
     author="Keita Watanabe",
