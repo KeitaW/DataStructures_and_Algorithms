@@ -1,2 +1,2 @@
-# DataStructures and Algorithms
+# Leet Code
 Personal notes on Data Structures and Algorithms. 
