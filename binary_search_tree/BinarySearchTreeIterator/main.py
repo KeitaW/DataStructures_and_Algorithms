@@ -4,9 +4,19 @@ class TreeNode:
         self.left = None
         self.right = None
 
+    def __str__(self, level=0, right=False):
+        return (
+            "    " * (level - 1)
+            + (" └──" if right else (" ├──" if level != 0 else ""))
+            + " "
+            + str(self.val)
+            + "\n"
+            + (self.left.__str__(level + 1, False) if self.left else "")
+            + (self.right.__str__(level + 1, True) if self.right else "")
+        )
+
 
 class BSTIterator:
-
     def __init__(self, root: TreeNode):
         self.root = root
 
