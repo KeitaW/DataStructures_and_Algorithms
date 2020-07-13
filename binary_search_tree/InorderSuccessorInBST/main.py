@@ -7,6 +7,23 @@ class TreeNode:
 
 class Solution:
     def inorderSuccessor(self, root: TreeNode, p: TreeNode) -> TreeNode:
+        # 次のノード：左子を持たない直近のノード
+        succ = None
+        while root is not None:
+            if p.val < root.val:
+                # rootがpより大きい場合
+                # 左部分木を見つけるたびに、その親をsucc
+                # として登録する
+                succ = root
+                root = root.left
+            else:
+                # rootがpより小さいか等しい場合
+                # rootはpか、その上
+                # またはpから見た左部分木を指している
+                root = root.right
+        return succ
+
+    def inorderSuccessor2(self, root: TreeNode, p: TreeNode) -> TreeNode:
         output = []
         idx = [None]
 
