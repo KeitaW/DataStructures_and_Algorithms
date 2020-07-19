@@ -37,6 +37,7 @@ class Solution:
                 idx[0] = len(output)
             if node.right:
                 func(node.right)
+
         func(root)
         if idx[0] and idx[0] <= len(output) - 1:
             return output[idx[0]]
