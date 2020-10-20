@@ -1,2 +1,3 @@
 line_profiler
 jupyter
+black
