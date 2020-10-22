@@ -36,8 +36,15 @@ class BinarySearchTree:
         return validate(self.root)
 
     def __leftmost_inorder(self, root: TreeNode):
-        # For a given node, add all the elements in the leftmost
-        # branch of the tree under it to the stack
+        """
+        For a given node, add all the elements in the leftmost
+        branch of the tree under it to the stack
+
+        Parameters
+        ----------
+        root : TreeNode
+            [description]
+        """
         while root:
             self.stack.append(root)
             root = root.left
@@ -46,6 +53,13 @@ class BinarySearchTree:
         """
         @return the next smallest number
         """
+
+        def has_next() -> bool:
+            return len(self.stack) > 0
+
+        if not has_next():
+            raise StopIteration()
+
         # Node at the top of the stack is the next smallest element
         topmost_node = self.stack.pop()
 
@@ -55,21 +69,14 @@ class BinarySearchTree:
             self.__leftmost_inorder(topmost_node.right)
         return topmost_node.val
 
-    def hasNext(self) -> bool:
-        """
-        @return whether we have a next smallest number
-        """
-        return len(self.stack) > 0
-
     def __iter__(self):
         # Stack for the recursion simulation
         self.stack = []
 
         # Remember that the algorithm starts with a call to the helper function
         # with the root node as the input
-        self._leftmost_inorder(self.root)
-        while True:
-            pass
+        self.__leftmost_inorder(self.root)
+        return self
 
     def insert(self, val: int):
         if self.root is None:
@@ -91,9 +98,59 @@ class BinarySearchTree:
 
         __insert(self.root)
 
-    def delete(self, val):
-        pass
+    def inorder(self, node: TreeNode):
+        return (
+            self.inorder(node.left) + [node.val] + self.inorder(node.right)
+            if node
+            else []
+        )
 
-    def search(self, val):
-        pass
+    def successor(self, node: TreeNode):
+        node = node.right
+        while node.left is not None:
+            node = node.left
+        return node.val
 
+    def predecessor(self, node: TreeNode):
+        node = node.left
+        while node.right:
+            node = node.right
+        return node.val
+
+    def delete(self, key: int):
+        if self.root is None:
+            return None
+
+        def __delete(node, key: int):
+            # delete from the right subtree
+            if key > node.val:
+                node.right = __delete(node.right, key)
+            # delete from the left subtree
+            elif key < node.val:
+                node.left = __delete(node.left, key)
+            # delete the current node
+            else:
+                # the node is a leaf
+                if (node.left is None) and (node.right is None):
+                    node = None
+                # the node is not a leaf and has a right child
+                elif node.right is not None:
+                    node.val = self.successor(node)
+                    node.right = __delete(node.right, node.val)
+                # the node is not a leaf, has no right child, and has a left child
+                else:
+                    node.val = self.predecessor(node)
+                    node.left = __delete(node.left, node.val)
+
+        __delete(self.root, key)
+
+    def search(self, val: int) -> TreeNode:
+        def traverse(node: TreeNode):
+            if (node is None) or (node.val == val):
+                return node
+            if node.val > val:
+                return traverse(node.left)
+            else:
+                return traverse(node.right)
+
+        return traverse(self.root)
