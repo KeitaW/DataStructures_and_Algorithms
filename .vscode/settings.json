@@ -2,7 +2,7 @@
     "python.linting.pylintEnabled": false,
     "python.pythonPath": "/Users/kei/anaconda3/envs/Algorithms/bin/python",
     "autoDocstring.docstringFormat": "numpy",
-    "python.formatting.provider": "black",
+    "python.formatting.provider": "autopep8",
     "python.linting.flake8Enabled": true,
     "python.linting.enabled": true,
     "cSpell.words": [

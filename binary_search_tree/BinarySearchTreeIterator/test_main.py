@@ -19,6 +19,7 @@ def tree():
 
 def test_main(tree):
     iterator = BSTIterator1(tree)
+
     assert iterator.next() == 3
     assert iterator.next() == 7
     assert iterator.hasNext() == True
