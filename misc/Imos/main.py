@@ -36,3 +36,14 @@ class Imos1d:
         for i in range(1, T):
             table[i] += table[i-1]
         return max(table)
+
+
+class Imos2d:
+    def __init__(self) -> None:
+        pass
+
+    def solution_naive(self, T: int, C: int, S: List[int], E: List[int]) -> int:
+        pass
+
+    def solution(self, T: int, C: int, S: List[int], E: List[int]) -> int:
+        pass
