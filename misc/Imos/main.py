@@ -43,7 +43,9 @@ class Imos2d:
         pass
 
     def solution_naive(self, T: int, C: int, S: List[int], E: List[int]) -> int:
-        pass
+        for row in range(H):
+            for col in range(W):
+                pass
 
     def solution(self, T: int, C: int, S: List[int], E: List[int]) -> int:
         pass
