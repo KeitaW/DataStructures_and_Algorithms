@@ -55,10 +55,15 @@ class Imos2d:
     def __init__(self) -> None:
         pass
 
-    def solution_naive(self, T: int, C: int, S: List[int], E: List[int]) -> int:
-        for row in range(H):
-            for col in range(W):
-                pass
+    def solution_naive(self, H: int, W: int, N: int, A: List[int], B: List[int], C: List[int], D: List[int]) -> int:
+        """O(NHW)
+        """
+        T = [[0 for _ in range(W)] for _ in range(H)]
+        for i in range(N):
+            for row in range(A[i], B[i]+1):
+                for col in range(C[i], D[i]+1):
+                    T[row][col] += 1
+        return max([max(row) for row in T])
 
     def solution(self, T: int, C: int, S: List[int], E: List[int]) -> int:
         pass
