@@ -1,4 +1,5 @@
 
+import numpy as np
 from typing import List
 
 """問題
@@ -60,10 +61,28 @@ class Imos2d:
         """
         T = [[0 for _ in range(W)] for _ in range(H)]
         for i in range(N):
-            for row in range(A[i], B[i]+1):
-                for col in range(C[i], D[i]+1):
+            for row in range(C[i], D[i]+1):
+                for col in range(A[i], B[i]+1):
                     T[row][col] += 1
         return max([max(row) for row in T])
 
-    def solution(self, T: int, C: int, S: List[int], E: List[int]) -> int:
-        pass
+    def solution(self, H: int, W: int, N: int, A: List[int], B: List[int], C: List[int], D: List[int]) -> int:
+        """O(N + HW)
+        """
+        T = [[0 for _ in range(W+1)] for _ in range(H+1)]
+        for i in range(N):
+            T[C[i]][A[i]] += 1  # 左上
+            T[C[i]][B[i]+1] -= 1  # 右上
+            T[D[i]+1][B[i]+1] += 1  # 右下
+            T[D[i]+1][A[i]] -= 1  # 左下
+        # 横方向の累積和
+        print("")
+        print(np.array(T))
+        for row in range(H):
+            for col in range(1, W):
+                T[row][col] += T[row][col-1]
+        for row in range(1, H):
+            for col in range(W):
+                T[row][col] += T[row-1][col]
+        print(T)
+        return max([max(row) for row in T])

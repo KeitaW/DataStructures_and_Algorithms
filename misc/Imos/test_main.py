@@ -21,3 +21,4 @@ def test_Imos2d():
     D = [3, 4, 5]
     imos2d = Imos2d()
     assert imos2d.solution_naive(H, W, N, A, B, C, D) == 3
+    assert imos2d.solution(H, W, N, A, B, C, D) == 3
