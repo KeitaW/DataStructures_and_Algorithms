@@ -1,2 +1,2 @@
 # LeetCode
-Personal notes on LeetCode problems. 
+Personal notes on data structure and LeetCode problems. 
